@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 $.ajax({
   type: "POST",
-  url: "../test.py"
+  url: "./test.py"
 }).done(function( o ) {
    console.log(o);
 });
