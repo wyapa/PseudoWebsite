@@ -28,23 +28,10 @@
 	</script>
 
 	<script type="text/javascript">
-
-
-		var data = "TEST TEXT"
-
-		$.ajax({
-			type: 'POST',
-			url: '/postmethod',
-			
-			success: function(response) {
-				console.log(response);
-			},
-			error: function(response) {
-				return console.error(response);
-			}
-		});
-
-		
+		var data = "TEST TEXT";
+		$.post( "/postmethod", {
+    javascript_data: data 
+	});	
 	
 	</script>
 </body>
