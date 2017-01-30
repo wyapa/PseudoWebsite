@@ -39,6 +39,6 @@ def about():
 
 @app.route('/getmethod/<jsdata>')
 def get_javascript_data(jsdata):
-    jsdata = "HELLO"
+    jsdata = "TEST2"
     return json.dumps(jsdata)
 
