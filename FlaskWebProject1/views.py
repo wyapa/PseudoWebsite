@@ -37,5 +37,5 @@ def about():
     )
 
 @app.route('/execute', methods=['GET'])
-def post():
+def execute():
     return "HELLLO"
