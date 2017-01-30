@@ -13,10 +13,7 @@
 	<script type="text/javascript" src="./../static/plugin/codemirror/lib/codemirror.js"></script>
 	<script type="text/javascript" src="./../static/scripts/default.js"></script>
 	<script type="text/javascript">
-		var data = "TEST TEXT";
-		$.post( "/postmethod", {
-			javascript_data: data 
-		});
+		console.log($.get( "/getmethod/<jsdata>" ));
 	</script>
 </body>
 </html> 
