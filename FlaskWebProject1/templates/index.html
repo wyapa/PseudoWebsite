@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="./../static/plugin/codemirror/lib/codemirror.js"></script>
 	<script type="text/javascript" src="./../static/scripts/default.js"></script>
 	<script type="text/javascript">
-	
+
 		$.ajax({
 			type: 'GET',
 			url: '/getmethod/<jsdata>',
@@ -25,6 +25,27 @@
 				return console.error(response);
 			}
 		});
+	</script>
+
+	<script type="text/javascript">
+
+
+		var data = "TEST TEXT"
+
+		$.ajax({
+			type: 'POST',
+			url: '/postmethod',
+			
+			success: function(response) {
+				console.log(response);
+			},
+			error: function(response) {
+				return console.error(response);
+			}
+		});
+
+		
+	
 	</script>
 </body>
 </html> 
