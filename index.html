@@ -14,10 +14,15 @@
 	<script type="text/javascript" src="js/default.js"></script>
 	<script type="text/javascript">
 		$.ajax({
-			type: "POST",
-			url: "./test.py"
-		}).done(function( o ) {
-			console.log(o);
+			type: 'GET',
+			url: 'test.py',
+
+			success: function(response) {
+				console.log(response);
+			},
+			error: function(response) {
+				return console.error(response);
+			}
 		});
 	</script>
 </body>
