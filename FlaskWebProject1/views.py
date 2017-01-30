@@ -5,6 +5,7 @@ Routes and views for the flask application.
 from datetime import datetime
 from flask import render_template
 from FlaskWebProject1 import app
+import json
 
 @app.route('/')
 @app.route('/home')
@@ -36,6 +37,7 @@ def about():
         message='Your application description page.'
     )
 
-@app.route('/execute', methods=['GET'])
-def execute():
-    return "HELLLO"
+@app.route('/getmethod/<jsdata>')
+def get_javascript_data(jsdata):
+    jsdata = "HELLO"
+    return json.dumps(jsdata)

@@ -13,17 +13,8 @@
 	<script type="text/javascript" src="./../static/plugin/codemirror/lib/codemirror.js"></script>
 	<script type="text/javascript" src="./../static/scripts/default.js"></script>
 	<script type="text/javascript">
-		$.ajax({
-			type: 'GET',
-			url: '/execute',
-
-			success: function(response) {
-				console.log(response);
-			},
-			error: function(response) {
-				return console.error(response);
-			}
-		});
+	
+		$.get( "/getmethod/<jsdata>" );
 	</script>
 </body>
 </html> 
