@@ -7,3 +7,10 @@ $(document).ready(function(){
 
 
 });
+
+$.ajax({
+  type: "GET",
+  url: "../test.py"
+}).done(function( o ) {
+   console.log(o);
+});
