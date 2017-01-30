@@ -37,8 +37,8 @@ def about():
         message='Your application description page.'
     )
 
-@app.route('/getmethod/<jsdata>')
-def get_javascript_data(jsdata):
-    jsdata = "TEST2"
-    return json.dumps(jsdata)
+@app.route('/postmethod', methods = ['POST'])
+def get_post_javascript_data():
+    jsdata = request.form['javascript_data']
+    return jsdata
 

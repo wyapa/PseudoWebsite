@@ -13,17 +13,9 @@
 	<script type="text/javascript" src="./../static/plugin/codemirror/lib/codemirror.js"></script>
 	<script type="text/javascript" src="./../static/scripts/default.js"></script>
 	<script type="text/javascript">
-	
-		$.ajax({
-			type: 'GET',
-			url: '/getmethod/<jsdata>',
-
-			success: function(response) {
-				console.log(response);
-			},
-			error: function(response) {
-				return console.error(response);
-			}
+		var data = "TEST TEXT";
+		$.post( "/postmethod", {
+			javascript_data: data 
 		});
 	</script>
 </body>
