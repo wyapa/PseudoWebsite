@@ -1,4 +1,11 @@
-#!/d/Python27/python
-print "HELLO"
+from flask import Flask
+app = Flask(__name__)
 
-return "HELLO"
+@app.route("/test.py")  # consider to use more elegant URL in your JS
+def get_x():
+    x = 2
+    return x
+
+if __name__ == "__main__":
+    # here is starting of the development HTTP server
+    app.run()
