@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Pseudo Web IDE</title>
-		<link rel="stylesheet" type="text/css" href="plugin/codemirror/lib/codemirror.css">
+<head>
+	<title>Pseudo Web IDE</title>
+	<link rel="stylesheet" type="text/css" href="plugin/codemirror/lib/codemirror.css">
 
-	</head>
-	<body>
-		<textarea class="codemirror-textarea"></textarea>
+</head>
+<body>
+	<textarea class="codemirror-textarea"></textarea>
 
-		<!-- javascript -->
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="plugin/codemirror/lib/codemirror.js"></script>
-		<script type="text/javascript" src="js/default.js"></script>
-	</body>
+	<!-- javascript -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="plugin/codemirror/lib/codemirror.js"></script>
+	<script type="text/javascript" src="js/default.js"></script>
+	<script type="text/javascript">
+		$.ajax({
+			type: "POST",
+			url: "./test.py"
+		}).done(function( o ) {
+			console.log(o);
+		});
+	</script>
+</body>
 </html> 
