@@ -59,8 +59,10 @@ def postmethod():
 
     with open(psu_file, 'a+') as f:
         f.write(jsdata)
-    
-    call_string = 'python ../Pseudo/pseudo.py ' + psu_file
+    pseudo_path2 = 'python ../Pseudo/pseudo.py '
+
+    pseudo_path = 'python ./Pseudo/pseudo.py '
+    call_string = pseudo_path + psu_file
     #os.system(call_string)
     
     output = subprocess.check_output(call_string, shell=True)
