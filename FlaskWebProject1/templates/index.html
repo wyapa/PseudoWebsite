@@ -1,33 +1,61 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Pseudo Web IDE</title>
-	<link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/lib/codemirror.css">
+    <title>Pseudo Web IDE</title>
+    <link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/lib/codemirror.css">
+
+
+    <script type="text/javascript" src="./../static/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="./../static/plugin/codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" src="./../static/scripts/default.js"></script>
 
 </head>
-<body>
-	<textarea class="codemirror-textarea"></textarea>
 
-	<!-- javascript -->
-	<script type="text/javascript" src="./../static/scripts/jquery.min.js"></script>
-	<script type="text/javascript" src="./../static/plugin/codemirror/lib/codemirror.js"></script>
-	<script type="text/javascript" src="./../static/scripts/default.js"></script>
-	<script type="text/javascript">
-	/*
-		$.ajax({
-			type: "GET",
-			url: "/getmethod/<jsdata>",
-			
-		}).done(function( o ) {
-   		console.log("SUCCESS");
-});
-*/
-	var javascript_data = "TESTESGSEF";
-	var data = "REFEDAWDAW";
-	$.post( "/postmethod/<jsdata>", {
-    javascript_data: data 
-	});
-		
-	</script>
+<body>
+    <textarea id="editor"> </textarea>
+    <button onclick="submit_html();">Submit</button>
 </body>
-</html> 
+
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+        lineNumbers: true,
+        theme: "blackboard"
+    });
+
+    function submit_html() {
+        editor.save();
+        var code = document.getElementById("editor").value;
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/postmethod",
+            data: {
+                'javascript_data': code
+            },
+        }).success(function(o) {
+            console.log(o);
+        }).error(function(data) {
+            console.log(data);
+        });
+    }
+
+
+    /*
+		test("test", function(returnData){
+			var output = returnData;
+			console.log(returnData);
+		});
+
+
+		function test(input, callback){
+			var output = processInput(input);
+			callback(output);
+		}
+
+*/
+</script>
+
+</html>

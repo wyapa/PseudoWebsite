@@ -6,7 +6,10 @@ from datetime import datetime
 from flask import render_template
 from FlaskWebProject1 import app
 import json
-
+from flask import request
+import uuid
+import os
+from subprocess import call
 @app.route('/')
 @app.route('/home')
 def home():
@@ -43,7 +46,17 @@ def get_javascript_data(jsdata):
     return json.dumps(jsdata)
 
 
-@app.route('/postmethod/<jsdata>')
-def get_post_javascript_data(jsdata):
+@app.route('/postmethod', methods = ['POST'])
+def postmethod():
     jsdata = request.form['javascript_data']
-    return jsdata
+    name = uuid.uuid4()
+    path = './user_code/' + str(name) + '.psu'
+    path = os.path.abspath(path)
+
+    with open(path, 'a+') as f:
+        f.write(jsdata)
+    
+    call_string = 'python ../Pseudo/pseudo.py ' + path
+    #call([call_string])
+   
+    return call_string
