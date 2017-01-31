@@ -42,3 +42,7 @@ def get_javascript_data(jsdata):
     jsdata = "TEST"
     return json.dumps(jsdata)
 
+@app.route('/postmethod', methods = ['POST'])
+def get_post_javascript_data():
+    jsdata = request.form['javascript_data']
+    return jsdata

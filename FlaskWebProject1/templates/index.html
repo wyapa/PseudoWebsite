@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="./../static/plugin/codemirror/lib/codemirror.js"></script>
 	<script type="text/javascript" src="./../static/scripts/default.js"></script>
 	<script type="text/javascript">
-
+	/*
 		$.ajax({
 			type: "GET",
 			url: "/getmethod/<jsdata>",
@@ -21,7 +21,11 @@
 		}).done(function( o ) {
    		console.log("SUCCESS");
 });
-		
-	</script>
+*/
+var data = "TESTING"
+$.post( "/postmethod", {
+	javascript_data: data 
+});
+</script>
 </body>
 </html> 
