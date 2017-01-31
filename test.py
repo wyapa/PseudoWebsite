@@ -1,11 +1,14 @@
-from flask import Flask
-app = Flask(__name__)
+import uuid
+import os
+import subprocess
+import json
 
-@app.route("/test.py")  # consider to use more elegant URL in your JS
-def get_x():
-    x = 2
-    return x
+py_file = './user_code/9f39ca09-638e-444e-82b5-52b620defe84.py'
 
-if __name__ == "__main__":
-    # here is starting of the development HTTP server
-    app.run()
+with open(py_file, 'r') as file:
+        test = file.read()
+
+test = test.replace('\n', '/newline')
+
+j = json.dumps(test)
+print json.loads(j)

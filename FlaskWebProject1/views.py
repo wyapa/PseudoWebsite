@@ -9,7 +9,9 @@ import json
 from flask import request
 import uuid
 import os
-from subprocess import call
+import subprocess
+from flask import jsonify
+
 @app.route('/')
 @app.route('/home')
 def home():
@@ -50,13 +52,26 @@ def get_javascript_data(jsdata):
 def postmethod():
     jsdata = request.form['javascript_data']
     name = uuid.uuid4()
-    path = './user_code/' + str(name) + '.psu'
-    path = os.path.abspath(path)
+    path = './user_code/' + str(name) 
+    py_file = path + '.py'
+    psu_file = path + '.psu'
+    psu_file = os.path.abspath(psu_file)
 
-    with open(path, 'a+') as f:
+    with open(psu_file, 'a+') as f:
         f.write(jsdata)
     
-    call_string = 'python ../Pseudo/pseudo.py ' + path
-    #call([call_string])
-   
-    return call_string
+    call_string = 'python ../Pseudo/pseudo.py ' + psu_file
+    #os.system(call_string)
+    
+    output = subprocess.check_output(call_string, shell=True)
+    
+    with open(py_file, 'r') as file:
+        python_code = file.read()
+    '''
+    send = {}
+    send['python'] = python_code
+    send['output'] = output
+    '''
+    #return jsonify(python_code)
+    python_code = python_code.replace('\n', '&&newline&&')
+    return json.dumps(python_code)

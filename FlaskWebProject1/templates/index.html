@@ -9,12 +9,15 @@
     <script type="text/javascript" src="./../static/scripts/jquery.min.js"></script>
     <script type="text/javascript" src="./../static/plugin/codemirror/lib/codemirror.js"></script>
     <script type="text/javascript" src="./../static/scripts/default.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
 </head>
 
 <body>
     <textarea id="editor"> </textarea>
+    <pre id = "python" class="prettyprint"></pre>
     <button onclick="submit_html();">Submit</button>
+
 </body>
 
 <script>
@@ -23,6 +26,10 @@
         theme: "blackboard"
     });
 
+    String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+}	;
     function submit_html() {
         editor.save();
         var code = document.getElementById("editor").value;
@@ -35,11 +42,21 @@
             data: {
                 'javascript_data': code
             },
-        }).success(function(o) {
-            console.log(o);
+        }).success(function(data) {
+        	
+        	var json = JSON.parse(data);
+        	
+   			json = json.replace(/&&newline&&/g, "\n")
+        	//console.log(o['python']);
+            $("#python").text(String(json)).parent().removeClass("prettyprinted");
+
+   			prettyPrint();
         }).error(function(data) {
-            console.log(data);
+            console.log("ERROR");
         });
+
+         
+        
     }
 
 
