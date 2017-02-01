@@ -12,10 +12,11 @@ import os
 import subprocess
 from flask import jsonify
 import sys
+'''
 sys.path.append('./Pseudo/')
 import pseudo
-#sys.path.insert(0, './Pseudo')
-#import pseudo
+'''
+
 @app.route('/')
 @app.route('/home')
 def home():
