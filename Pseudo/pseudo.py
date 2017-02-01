@@ -4,8 +4,7 @@ import translate
 import sys
 import re
 import os
-
-sys.path.append('../Pseudo/')
+sys.path.append('./')
 import tokenpseudo as token
 def main(args):
   args = args.split()
