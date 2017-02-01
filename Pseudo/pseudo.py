@@ -1,11 +1,11 @@
-'''
+#!/usr/bin/python
 from __future__ import absolute_import
 import translate
 import sys
 import re
 import os
 sys.path.append('./')
-import tokenpseudo as token
+import tokenpseudo as tk
 def main(args):
   args = args.split()
 
@@ -23,7 +23,7 @@ def main(args):
 
 
   f = open(filename, 'r')
-  tokens = token.tokenize(f)
+  tokens = tk.tokenize(f)
   translation = translate.parse(tokens)
   f.close()
   code = open(filename[:-4] + '.py', 'w+')
@@ -34,4 +34,3 @@ def main(args):
 
 if __name__ == "__main__":
   main()
-'''

@@ -11,10 +11,10 @@ import uuid
 import os
 from flask import jsonify
 import sys
-'''
+
 sys.path.append('./Pseudo/')
 import pseudo
-'''
+
 
 @app.route('/')
 @app.route('/home')
@@ -64,7 +64,7 @@ def postmethod():
     with open(psu_file, 'a+') as f:
         f.write(jsdata)
     
-    '''
+    
 
     command = 'pseudo.py ' + psu_file
     print command
@@ -76,7 +76,7 @@ def postmethod():
 
 
 
-
+    '''
 
     send = {}
     send['python'] = python_code
