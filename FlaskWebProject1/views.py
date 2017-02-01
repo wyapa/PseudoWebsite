@@ -11,7 +11,6 @@ import uuid
 import os
 from flask import jsonify
 import sys
-
 sys.path.append('./Pseudo/')
 import pseudo
 
