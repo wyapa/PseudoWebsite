@@ -5,16 +5,16 @@ import translate
 import sys
 import re
 
-def main():
-
-  if len(sys.argv) > 2:
-    print "pseudo: " + " ".join(sys.argv) + ". Too many arguments. Usage: pseudo file"
+def main(args):
+  args = args.split()
+  if len(args) > 2:
+    print "pseudo: " + " ".join(args) + ". Too many arguments. Usage: pseudo file"
     exit()
-  elif len(sys.argv) < 2:
+  elif len(args) < 2:
     print "pseudo: Too few arguments. Usage: pseudo file"
     exit()
 
-  filename = sys.argv[1]
+  filename = args[1]
   if re.match(r'(.*)\.psu$', filename) == None:
     print "pseudo: Not a '.psu' file. Usage: pseudo file"
     exit()

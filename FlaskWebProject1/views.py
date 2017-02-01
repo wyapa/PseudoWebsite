@@ -11,7 +11,8 @@ import uuid
 import os
 import subprocess
 from flask import jsonify
-
+import imp
+import pseudo
 @app.route('/')
 @app.route('/home')
 def home():
@@ -65,7 +66,7 @@ def postmethod():
     call_string = pseudo_path + psu_file
     #os.system(call_string)
     
-    output = subprocess.check_output(call_string, shell=True)
+    pseudo(psu_file)
     
     with open(py_file, 'r') as file:
         python_code = file.read()
