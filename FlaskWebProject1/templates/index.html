@@ -15,7 +15,7 @@
 
 <body>
     <textarea id="editor"> </textarea>
-    <pre id = "python" class="prettyprint"></pre>
+    <pre id="python" class="prettyprint"></pre>
     <button onclick="submit_html();">Submit</button>
 
 </body>
@@ -27,38 +27,41 @@
     });
 
     String.prototype.replaceAll = function(search, replacement) {
-    var target = this;
-    return target.replace(new RegExp(search, 'g'), replacement);
-}	;
-    function submit_html() {
-        editor.save();
-        var code = document.getElementById("editor").value;
+        var target = this;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
+    try {
+        function submit_html() {
+            editor.save();
+            var code = document.getElementById("editor").value;
 
 
 
-        $.ajax({
-            type: "POST",
-            url: "/postmethod",
-            data: {
-                'javascript_data': code
-            },
-        }).success(function(data) {
-        	
-        	var json = JSON.parse(data);
-        	
-   			json = json.replace(/&&newline&&/g, "\n")
-        	//console.log(o['python']);
-            $("#python").text(String(json)).parent().removeClass("prettyprinted");
+            $.ajax({
+                type: "POST",
+                url: "/postmethod",
+                data: {
+                    'javascript_data': code
+                },
+            }).success(function(data) {
 
-   			prettyPrint();
-        }).error(function(data) {
-            console.log(data);
-        });
+                var json = JSON.parse(data);
 
-         
+                json = json.replace(/&&newline&&/g, "\n")
+                //console.log(o['python']);
+                $("#python").text(String(json)).parent().removeClass("prettyprinted");
+
+                prettyPrint();
+            }).error(function(data) {
+                console.log(data);
+            });
+
+
+
+        }
+    } catch (err) {
         
     }
-
 
     /*
 		test("test", function(returnData){
