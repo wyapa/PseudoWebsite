@@ -56,6 +56,7 @@ def get_javascript_data(jsdata):
     return json.dumps(jsdata)
 
 
+
 @app.route('/postmethod', methods = ['POST'])
 def postmethod():
     jsdata = request.form['javascript_data']
@@ -63,6 +64,7 @@ def postmethod():
     path = './user_code/' + str(name) 
     py_file = path + '.py'
     psu_file = path + '.psu'
+    out_file = path + '.out'
     psu_file = os.path.abspath(psu_file)
 
     with open(psu_file, 'a+') as f:
@@ -71,16 +73,19 @@ def postmethod():
     
 
     command = 'pseudo.py ' + psu_file
-    print command
+    
     ps = pseudo.main(command)
    
     with open(py_file, 'r') as file:
         python_code = file.read()
     
-
-
-
-    '''
+    command = 'python ' + py_file + ' >> ' + out_file
+    
+    os.system(command)
+    with open(out_file, 'r') as file:
+        output = file.read()
+    
+    
 
     send = {}
     send['python'] = python_code
@@ -90,9 +95,9 @@ def postmethod():
 
     
 
-
+    data = {}
     python_code = python_code.replace('\n', '&&newline&&')
-    return json.dumps(python_code)
-    '''
-
-    return json.dumps("HELLO")
+    output = output.replace('\n', '&&newline&&')
+    data['python'] = python_code
+    data['output'] = output
+    return json.dumps(data)
