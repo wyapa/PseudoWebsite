@@ -25,12 +25,12 @@
 		lineNumbers: true,
 		theme: "blackboard"
 	});
-
+/*
 	String.prototype.replaceAll = function(search, replacement) {
 		var target = this;
 		return target.replace(new RegExp(search, 'g'), replacement);
 	};
-	
+*/
 	function submit_html() {
 		editor.save();
 		var code = document.getElementById("editor").value;
@@ -44,14 +44,14 @@
 				'javascript_data': code
 			},
 		}).success(function(data) {
+			console.log(data);
+			//var json = JSON.parse(data);
 
-			var json = JSON.parse(data);
-
-			json = json.replace(/&&newline&&/g, "\n")
+			//json = json.replace(/&&newline&&/g, "\n")
                 //console.log(o['python']);
-                $("#python").text(String(json)).parent().removeClass("prettyprinted");
+            //    $("#python").text(String(json)).parent().removeClass("prettyprinted");
 
-                prettyPrint();
+            //    prettyPrint();
             }).error(function(data) {
             	console.log(data);
             });
@@ -59,7 +59,7 @@
 
 
         }
-        
+
 
     /*
 		test("test", function(returnData){
