@@ -16,6 +16,11 @@ import pseudo
 
 
 @app.route('/')
+def spalsh():
+	return render_template(
+        'splash.html',
+        title='Home Page',
+    )
 @app.route('/home')
 def home():
     """Renders the home page."""
