@@ -64,7 +64,7 @@ def postmethod():
     with open(psu_file, 'a+') as f:
         f.write(jsdata)
     
-    
+    '''
 
     command = 'pseudo.py ' + psu_file
     print command
@@ -72,14 +72,23 @@ def postmethod():
    
     with open(py_file, 'r') as file:
         python_code = file.read()
-    '''
+    
+
+
+
+
+
     send = {}
     send['python'] = python_code
     send['output'] = output
     
     #return jsonify(python_code)
 
-    '''
+    
+
+
     python_code = python_code.replace('\n', '&&newline&&')
     return json.dumps(python_code)
-    
+    '''
+
+    return json.dumps("HELLO")
