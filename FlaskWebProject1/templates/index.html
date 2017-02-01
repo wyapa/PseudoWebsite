@@ -4,6 +4,10 @@
 <head>
 	<title>Pseudo Web IDE</title>
 	<link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/lib/codemirror.css">
+	<link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/theme/solarized.css">
+	<link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/theme/solarized-dark.css">
+	<link rel="stylesheet" type="text/css" href="prettify.css">
+
 
 
 	<script type="text/javascript" src="./../static/scripts/jquery.min.js"></script>
@@ -11,21 +15,44 @@
 	<script type="text/javascript" src="./../static/scripts/default.js"></script>
 	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
+	<script src = "./../static/plugin/codemirror/mode/python/python.js" ></script>
+
+
+
 </head>
 
 <body>
-	<textarea id="editor"> </textarea>
-	<pre id="python" class="prettyprint"></pre>
+<div TOP:35px;>
+TEST
+</div>
+<div id="content" width="1200px">
+	<div id="pseudo" width="600px" style="float:left">
+	<textarea id="editor" rows = "10" cols = "5"> </textarea>
+	</div>
+	<div id="divpython" width="600px" style="float:right">
+	<textarea id="pythonout" rows = "10" cols = "5"> </textarea>
+	</div>
+</div>
+<br/>
+<div id="submit" style="padding-top: 400px;">
+	<pre id="python" <pre class="prettyprint linenums:4" </pre>
 	<button onclick="submit_html();">Submit</button>
-
+</div>
 </body>
 
 <script>
 	var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
 		lineNumbers: true,
-		theme: "blackboard"
+		theme: "solarized-dark"
 	});
+	editor.setSize(600,400);
 
+	var pyedit = CodeMirror.fromTextArea(document.getElementById("pythonout"), {
+		lineNumbers: true,
+		mode: "python",
+		theme: "solarized-dark"
+	});
+	pyedit.setSize(600,400);
 	String.prototype.replaceAll = function(search, replacement) {
 		var target = this;
 		return target.replace(new RegExp(search, 'g'), replacement);
@@ -34,9 +61,6 @@
 	function submit_html() {
 		editor.save();
 		var code = document.getElementById("editor").value;
-
-
-
 		$.ajax({
 			type: "POST",
 			url: "/postmethod",
@@ -44,16 +68,18 @@
 				'javascript_data': code
 			},
 		}).success(function(data) {
-			console.log(data);
+			
 			var json = JSON.parse(data);
-
-			json = json.replace(/&&newline&&/g, "\n")
+			python = json['python']
+			output = json['output']
+			python = python.replace(/&&newline&&/g, "\n")
+			output = output.replace(/&&newline&&/g, "\n")
                 //console.log(o['python']);
-                $("#python").text(String(json)).parent().removeClass("prettyprinted");
-
-            //    prettyPrint();
+                $("#python").text(output).parent().removeClass("prettyprinted");
+            pyedit.getDoc().setValue(python);
+            prettyPrint();
             }).error(function(data) {
-            	console.log(data);
+            	console.log("Error");
             });
 
 
