@@ -1,3 +1,4 @@
+'''
 from __future__ import absolute_import
 import translate
 import sys
@@ -33,3 +34,4 @@ def main(args):
 
 if __name__ == "__main__":
   main()
+'''
