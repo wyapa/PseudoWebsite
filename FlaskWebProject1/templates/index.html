@@ -2,66 +2,64 @@
 <html>
 
 <head>
-    <title>Pseudo Web IDE</title>
-    <link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/lib/codemirror.css">
+	<title>Pseudo Web IDE</title>
+	<link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/lib/codemirror.css">
 
 
-    <script type="text/javascript" src="./../static/scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="./../static/plugin/codemirror/lib/codemirror.js"></script>
-    <script type="text/javascript" src="./../static/scripts/default.js"></script>
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+	<script type="text/javascript" src="./../static/scripts/jquery.min.js"></script>
+	<script type="text/javascript" src="./../static/plugin/codemirror/lib/codemirror.js"></script>
+	<script type="text/javascript" src="./../static/scripts/default.js"></script>
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
 </head>
 
 <body>
-    <textarea id="editor"> </textarea>
-    <pre id="python" class="prettyprint"></pre>
-    <button onclick="submit_html();">Submit</button>
+	<textarea id="editor"> </textarea>
+	<pre id="python" class="prettyprint"></pre>
+	<button onclick="submit_html();">Submit</button>
 
 </body>
 
 <script>
-    var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
-        lineNumbers: true,
-        theme: "blackboard"
-    });
+	var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+		lineNumbers: true,
+		theme: "blackboard"
+	});
 
-    String.prototype.replaceAll = function(search, replacement) {
-        var target = this;
-        return target.replace(new RegExp(search, 'g'), replacement);
-    };
-    try {
-        function submit_html() {
-            editor.save();
-            var code = document.getElementById("editor").value;
+	String.prototype.replaceAll = function(search, replacement) {
+		var target = this;
+		return target.replace(new RegExp(search, 'g'), replacement);
+	};
+	
+	function submit_html() {
+		editor.save();
+		var code = document.getElementById("editor").value;
 
 
 
-            $.ajax({
-                type: "POST",
-                url: "/postmethod",
-                data: {
-                    'javascript_data': code
-                },
-            }).success(function(data) {
+		$.ajax({
+			type: "POST",
+			url: "/postmethod",
+			data: {
+				'javascript_data': code
+			},
+		}).success(function(data) {
 
-                var json = JSON.parse(data);
+			var json = JSON.parse(data);
 
-                json = json.replace(/&&newline&&/g, "\n")
+			json = json.replace(/&&newline&&/g, "\n")
                 //console.log(o['python']);
                 $("#python").text(String(json)).parent().removeClass("prettyprinted");
 
                 prettyPrint();
             }).error(function(data) {
-                console.log(data);
+            	console.log(data);
             });
 
 
 
         }
-    } catch (err) {
         
-    }
 
     /*
 		test("test", function(returnData){
@@ -75,7 +73,7 @@
 			callback(output);
 		}
 
-*/
-</script>
+		*/
+	</script>
 
-</html>
+	</html>
