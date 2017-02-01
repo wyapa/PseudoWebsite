@@ -11,8 +11,11 @@ import uuid
 import os
 import subprocess
 from flask import jsonify
-import imp
+import sys
+sys.path.append('./Pseudo/')
 import pseudo
+#sys.path.insert(0, './Pseudo')
+#import pseudo
 @app.route('/')
 @app.route('/home')
 def home():
@@ -60,21 +63,23 @@ def postmethod():
 
     with open(psu_file, 'a+') as f:
         f.write(jsdata)
-    pseudo_path2 = 'python ../Pseudo/pseudo.py '
+    
+    
 
-    pseudo_path = 'python ./Pseudo/pseudo.py '
-    call_string = pseudo_path + psu_file
-    #os.system(call_string)
-    
-    pseudo(psu_file)
-    
+    command = 'pseudo.py ' + psu_file
+    print command
+    ps = pseudo.main(command)
+   
     with open(py_file, 'r') as file:
         python_code = file.read()
     '''
     send = {}
     send['python'] = python_code
     send['output'] = output
-    '''
+    
     #return jsonify(python_code)
+
+    '''
     python_code = python_code.replace('\n', '&&newline&&')
     return json.dumps(python_code)
+    

@@ -1,12 +1,14 @@
 #!/usr/bin/python
-
-import token
+from __future__ import absolute_import
 import translate
 import sys
 import re
-
+import os
+sys.path.append('../Pseudo/')
+import tokenpseudo as token
 def main(args):
   args = args.split()
+
   if len(args) > 2:
     print "pseudo: " + " ".join(args) + ". Too many arguments. Usage: pseudo file"
     exit()
@@ -18,6 +20,7 @@ def main(args):
   if re.match(r'(.*)\.psu$', filename) == None:
     print "pseudo: Not a '.psu' file. Usage: pseudo file"
     exit()
+
 
   f = open(filename, 'r')
   tokens = token.tokenize(f)

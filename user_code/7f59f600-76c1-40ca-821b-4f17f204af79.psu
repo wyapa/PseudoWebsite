@@ -1,4 +1,4 @@
-output "Hello World!"
+ output "Hello World!"
 output "This is a Pseudo program!"
 set variable foo to 5 plus 6
 output "The value of foo is:"

@@ -33,3 +33,4 @@ for I in range(0,10,2):
 	if I > 3 :
 		print I + 100 
 	else: 
+		print I - 100 
