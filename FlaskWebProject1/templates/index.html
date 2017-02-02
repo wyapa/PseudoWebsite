@@ -1,85 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
 
-<head>
-	<title>Pseudo Web IDE</title>
-	<link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/lib/codemirror.css">
-	<link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/theme/solarized.css">
-	<link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/theme/solarized-dark.css">
-	<link rel="stylesheet" type="text/css" href="prettify.css">
-
-
-
-	<script type="text/javascript" src="./../static/scripts/jquery.min.js"></script>
-	<script type="text/javascript" src="./../static/plugin/codemirror/lib/codemirror.js"></script>
-	<script type="text/javascript" src="./../static/scripts/default.js"></script>
-	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-
-	<script src = "./../static/plugin/codemirror/mode/python/python.js" ></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Pseudo Web IDE</title>
+    <link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/theme/solarized.css">
+    <link rel="stylesheet" type="text/css" href="./../static/plugin/codemirror/theme/solarized-dark.css">
+    <link rel="stylesheet" type="text/css" href="prettify.css">
 
 
 
-</head>
+    <script type="text/javascript" src="./../static/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="./../static/plugin/codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" src="./../static/scripts/default.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js" type="text/javascript"></script>
 
-<body>
-<div TOP:35px;>
-TEST
-</div>
-<div id="content" width="1200px">
-	<div id="pseudo" width="600px" style="float:left">
-	<textarea id="editor" rows = "10" cols = "5"> </textarea>
-	</div>
-	<div id="divpython" width="600px" style="float:right">
-	<textarea id="pythonout" rows = "10" cols = "5"> </textarea>
-	</div>
+    <script src = "./../static/plugin/codemirror/mode/python/python.js" ></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/starter-template.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Navigate</a>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Online IDE <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../static/content/Release.zip">Download IDE</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>Pseudo Web IDE</h1>
+        <p class="lead">Use this IDE to convert your Pseudo Code to Python!</p>
+      </div>
+      <div id="content" width="1920px">
+      <h3>Pseudo</h3>
+  <div id="pseudo" width="960px" style="float:left">
+  <textarea id="editor" rows = "10" cols = "5"> </textarea>
+  </div>
+  <h3>Python</h3>
+  <div id="divpython" width="960px" style="float:right">
+  <textarea id="pythonout" rows = "10" cols = "5"> </textarea>
+  </div>
 </div>
 <br/>
 <div id="submit" style="padding-top: 400px;">
-	<pre id="python" <pre class="prettyprint linenums:4" </pre>
-	<button onclick="submit_html();">Submit</button>
+  <pre id="python" <pre class="prettyprint linenums:4" </pre>
+  <button onclick="submit_html();">Submit</button>
 </div>
 </body>
 
 <script>
-	var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
-		lineNumbers: true,
-		theme: "solarized-dark"
-	});
-	editor.setSize(600,400);
+  var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+    lineNumbers: true,
+    theme: "solarized-dark"
+  });
+  editor.setSize(550,400);
 
-	var pyedit = CodeMirror.fromTextArea(document.getElementById("pythonout"), {
-		lineNumbers: true,
-		mode: "python",
-		theme: "solarized-dark"
-	});
-	pyedit.setSize(600,400);
-	String.prototype.replaceAll = function(search, replacement) {
-		var target = this;
-		return target.replace(new RegExp(search, 'g'), replacement);
-	};
+  var pyedit = CodeMirror.fromTextArea(document.getElementById("pythonout"), {
+    lineNumbers: true,
+    mode: "python",
+    theme: "solarized-dark"
+  });
+  pyedit.setSize(550	,400);
+  String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+  };
 
-	function submit_html() {
-		editor.save();
-		var code = document.getElementById("editor").value;
-		$.ajax({
-			type: "POST",
-			url: "/postmethod",
-			data: {
-				'javascript_data': code
-			},
-		}).success(function(data) {
-			
-			var json = JSON.parse(data);
-			python = json['python']
-			output = json['output']
-			python = python.replace(/&&newline&&/g, "\n")
-			output = output.replace(/&&newline&&/g, "\n")
+  function submit_html() {
+    editor.save();
+    var code = document.getElementById("editor").value;
+    $.ajax({
+      type: "POST",
+      url: "/postmethod",
+      data: {
+        'javascript_data': code
+      },
+    }).success(function(data) {
+      
+      var json = JSON.parse(data);
+      python = json['python']
+      output = json['output']
+      python = python.replace(/&&newline&&/g, "\n")
+      output = output.replace(/&&newline&&/g, "\n")
                 //console.log(o['python']);
                 $("#python").text(output).parent().removeClass("prettyprinted");
             pyedit.getDoc().setValue(python);
             prettyPrint();
             }).error(function(data) {
-            	console.log("Error");
+              console.log("Error");
             });
 
 
@@ -88,18 +123,32 @@ TEST
 
 
     /*
-		test("test", function(returnData){
-			var output = returnData;
-			console.log(returnData);
-		});
+    test("test", function(returnData){
+      var output = returnData;
+      console.log(returnData);
+    });
 
 
-		function test(input, callback){
-			var output = processInput(input);
-			callback(output);
-		}
+    function test(input, callback){
+      var output = processInput(input);
+      callback(output);
+    }
 
-		*/
-	</script>
+    */
+  </script>
 
-	</html>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+   
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
