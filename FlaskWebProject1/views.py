@@ -78,23 +78,22 @@ def postmethod():
     os.system(command)
     '''
     prog = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-    prog.wait()
-    ''' 
-    out, err = prog.communicate()
+   
+    ''' out, err = prog.communicate()
 
     prog.wait()
-    
+    '''
 
-    
+    '''
     pseudo.main(command)
     '''
     
 
 
-    
+    '''
     with open(py_file, 'r') as file:
         python_code = file.read()
-    '''
+    
     
     command = 'python ' + py_file + ' >> ' + out_file
     
