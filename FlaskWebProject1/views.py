@@ -77,7 +77,7 @@ def postmethod():
     os.system(command)
     '''
     pseudo.main(command)
-    
+    '''
     
     with open(py_file, 'r') as file:
         python_code = file.read()
@@ -87,11 +87,11 @@ def postmethod():
     os.system(command)
     with open(out_file, 'r') as file:
         output = file.read()
-    '''
+    
 
     data = {}
     
-    '''
+    
     send = {}
     send['python'] = python_code
     send['output'] = output
@@ -112,4 +112,4 @@ def postmethod():
     data['python'] = command
     data['output'] = "Test1"
     return json.dumps(data)
-    
+    '''
