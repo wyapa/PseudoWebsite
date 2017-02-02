@@ -105,7 +105,7 @@
         'javascript_data': code
       },
     }).success(function(data) {
-      
+      console.log(data)
       var json = JSON.parse(data);
       python = json['python']
       output = json['output']

@@ -68,7 +68,7 @@ def postmethod():
     out_file = path + '.out'
     psu_file = os.path.abspath(psu_file)
     py_file = os.path.abspath(py_file)
-
+    out_file = os.path.abspath(out_file)
     with open(psu_file, 'a+') as f:
         f.write(jsdata)
     
@@ -79,7 +79,8 @@ def postmethod():
     os.system(command)
     '''
     prog = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-   
+    data = {}
+    
     
 
     
@@ -101,28 +102,24 @@ def postmethod():
     
 
 
-     for i in range(0,100):
+
+
+
+    for i in range(0,100):
         while True:
             try:
                 with open(out_file, 'r') as file:
                     output = file.read()
-    
+                if output == "":
+                    continue
             except Exception:
                 continue
             break
-
-    data = {}
     
     
-    send = {}
-    send['python'] = python_code
-    send['output'] = output
-    
-    #return jsonify(python_code)
+       
 
     
-
-    data = {}
     python_code = python_code.replace('\n', '&&newline&&')
     output = output.replace('\n', '&&newline&&')
 
