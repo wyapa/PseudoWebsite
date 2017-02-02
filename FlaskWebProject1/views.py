@@ -11,6 +11,7 @@ import uuid
 import os
 from flask import jsonify
 import sys
+import subprocess
 
 
 
@@ -60,7 +61,7 @@ def get_javascript_data(jsdata):
 def postmethod():
     jsdata = request.form['javascript_data']
     name = uuid.uuid4()
-    
+    data = {}
     path = './user_code/' + str(name) 
     py_file = path + '.py'
     psu_file = path + '.psu'
@@ -71,16 +72,22 @@ def postmethod():
         f.write(jsdata)
     
     
-    command = 'python pseudo.py ' + str(psu_file)
+    command = 'python ./Pseudo/pseudo.py ' + str(psu_file)
 
     
-    os.system(command)
+    prog = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    out, err = prog.communicate()
+    prog.wait()
     '''
     pseudo.main(command)
     '''
     
+
+
+    
     with open(py_file, 'r') as file:
         python_code = file.read()
+    
     
     command = 'python ' + py_file + ' >> ' + out_file
     
@@ -107,9 +114,9 @@ def postmethod():
     data['python'] = python_code
     data['output'] = output
     return json.dumps(data)
-    '''
+    
 
     data['python'] = command
     data['output'] = "Test1"
     return json.dumps(data)
-    '''
+    
