@@ -62,6 +62,7 @@ def get_javascript_data(jsdata):
 def postmethod():
     jsdata = request.form['javascript_data']
     name = uuid.uuid4()
+    '''
     path = './user_code/' + str(name) 
     py_file = path + '.py'
     psu_file = path + '.psu'
@@ -85,7 +86,7 @@ def postmethod():
     os.system(command)
     with open(out_file, 'r') as file:
         output = file.read()
-    
+    '''
 
     data = {}
     '''
