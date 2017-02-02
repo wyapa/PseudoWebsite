@@ -71,7 +71,7 @@ def postmethod():
         f.write(jsdata)
     
     
-    command = 'python pseudo.py ' + psu_file
+    command = 'python pseudo.py ' + str(psu_file)
     '''
     os.system(command)
     
