@@ -12,8 +12,6 @@ import os
 from flask import jsonify
 import sys
 
-sys.path.append('./Pseudo/')
-import pseudo
 
 
 @app.route('/')
@@ -73,8 +71,8 @@ def postmethod():
         f.write(jsdata)
     
     
-    command = 'pseudo.py ' + psu_file
-    os.system("ls")
+    command = 'python pseudo.py ' + psu_file
+    os.system(command)
     '''
     pseudo.main(command)
     
@@ -107,6 +105,6 @@ def postmethod():
     data['output'] = output
     return json.dumps(data)
     '''
-    data['python'] = "Test1"
+    data['python'] = command
     data['output'] = "Test1"
     return json.dumps(data)

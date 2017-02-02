@@ -6,22 +6,18 @@ import os
 sys.path.append('./')
 import translate
 import tokenpseudo as tk
-def main(args):
-  args = args.split()
-
-  if len(args) > 2:
-    print "pseudo: " + " ".join(args) + ". Too many arguments. Usage: pseudo file"
+def main():
+  if len(sys.argv) > 2:
+    print "pseudo: " + " ".join(sys.argv) + ". Too many arguments. Usage: pseudo file"
     exit()
-  elif len(args) < 2:
+  elif len(sys.argv) < 2:
     print "pseudo: Too few arguments. Usage: pseudo file"
     exit()
 
-  filename = args[1]
+  filename = sys.argv[1]
   if re.match(r'(.*)\.psu$', filename) == None:
     print "pseudo: Not a '.psu' file. Usage: pseudo file"
     exit()
-
-
   f = open(filename, 'r')
   tokens = tk.tokenize(f)
   translation = translate.parse(tokens)
@@ -29,8 +25,15 @@ def main(args):
   code = open(filename[:-4] + '.py', 'w+')
   code.write(translation)
   code.close()
+  print "PYTHON CODE:"
+  print "\n"
+  print translation
+  print "_____________________________________________________________________"
+  print "PROGRAM OUTPUT:"
+  print "\n"
   exec(translation)
-  print "Code has been run and has been translated into " + filename[:-4] + ".py"
+  print "_____________________________________________________________________"
+  print "Code has been run and has successfully translated into " + filename[:-4] + ".py"
 
 if __name__ == "__main__":
   main()
