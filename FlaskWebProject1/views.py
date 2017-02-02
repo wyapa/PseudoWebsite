@@ -74,9 +74,10 @@ def postmethod():
     
     
     command = 'pseudo.py ' + psu_file
-    
-    pseudo.main(command)
+    os.system("ls")
     '''
+    pseudo.main(command)
+    
     with open(py_file, 'r') as file:
         python_code = file.read()
     
@@ -106,6 +107,6 @@ def postmethod():
     data['output'] = output
     return json.dumps(data)
     '''
-    data['python'] = "Test2"
-    data['output'] = "Test2"
+    data['python'] = "Test1"
+    data['output'] = "Test1"
     return json.dumps(data)
