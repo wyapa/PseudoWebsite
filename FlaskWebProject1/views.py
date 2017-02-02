@@ -74,10 +74,12 @@ def postmethod():
     
     command = 'python ./Pseudo/pseudo.py ' + str(psu_file)
 
-    
+
+    os.system(command)
+    '''
     prog = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     out, err = prog.communicate()
-    '''
+
     prog.wait()
 '''
 
