@@ -94,7 +94,7 @@ def postmethod():
     
     with open(py_file, 'r') as file:
         python_code = file.read()
-    
+    '''
     
     command = 'python ' + py_file + ' >> ' + out_file
     
@@ -126,4 +126,4 @@ def postmethod():
     data['python'] = command
     data['output'] = "Test1"
     return json.dumps(data)
-    '''
+    
