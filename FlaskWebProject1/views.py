@@ -62,7 +62,7 @@ def get_javascript_data(jsdata):
 def postmethod():
     jsdata = request.form['javascript_data']
     name = uuid.uuid4()
-    '''
+    
     path = './user_code/' + str(name) 
     py_file = path + '.py'
     psu_file = path + '.psu'
@@ -72,7 +72,7 @@ def postmethod():
     with open(psu_file, 'a+') as f:
         f.write(jsdata)
     
-    
+    '''
 
     command = 'pseudo.py ' + psu_file
     
