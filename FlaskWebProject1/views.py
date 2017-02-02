@@ -75,7 +75,7 @@ def postmethod():
     
     command = 'pseudo.py ' + psu_file
     
-    ps = pseudo.main(command)
+    pseudo.main(command)
     '''
     with open(py_file, 'r') as file:
         python_code = file.read()
