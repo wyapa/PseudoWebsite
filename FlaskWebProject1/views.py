@@ -86,7 +86,9 @@ def postmethod():
     with open(out_file, 'r') as file:
         output = file.read()
     
-    
+
+    data = {}
+    '''
 
     send = {}
     send['python'] = python_code
@@ -99,6 +101,11 @@ def postmethod():
     data = {}
     python_code = python_code.replace('\n', '&&newline&&')
     output = output.replace('\n', '&&newline&&')
+
     data['python'] = python_code
     data['output'] = output
+    return json.dumps(data)
+    '''
+    data['python'] = "TEST"
+    data['output'] = "TESFSE"
     return json.dumps(data)
