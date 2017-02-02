@@ -78,19 +78,20 @@ def postmethod():
     os.system(command)
     '''
     prog = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-   
-    ''' out, err = prog.communicate()
+    prog.wait()
+    ''' 
+    out, err = prog.communicate()
 
     prog.wait()
-    '''
+    
 
-    '''
+    
     pseudo.main(command)
     '''
     
 
 
-    '''
+    
     with open(py_file, 'r') as file:
         python_code = file.read()
     
@@ -125,4 +126,4 @@ def postmethod():
     data['python'] = command
     data['output'] = "Test1"
     return json.dumps(data)
-    
+    '''
