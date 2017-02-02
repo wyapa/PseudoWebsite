@@ -81,7 +81,7 @@ def postmethod():
    
     
 
-    
+    '''
     for i in range(0,100):
         while True:
             try:
@@ -90,6 +90,8 @@ def postmethod():
             except Exception:
                 continue
             break
+
+    '''
     '''
     command = 'python ' + py_file + ' >> ' + out_file
     
