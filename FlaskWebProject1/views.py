@@ -106,6 +106,6 @@ def postmethod():
     data['output'] = output
     return json.dumps(data)
     '''
-    data['python'] = "Test1"
-    data['output'] = "Test1"
+    data['python'] = "Test2"
+    data['output'] = "Test2"
     return json.dumps(data)
