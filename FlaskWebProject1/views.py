@@ -1,7 +1,7 @@
 """
 Routes and views for the flask application.
 """
-
+from __future__ import absolute_import
 from datetime import datetime
 from flask import render_template
 from FlaskWebProject1 import app
@@ -11,6 +11,7 @@ import uuid
 import os
 from flask import jsonify
 import sys
+
 sys.path.append('./Pseudo/')
 import pseudo
 
