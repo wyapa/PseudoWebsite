@@ -67,6 +67,7 @@ def postmethod():
     psu_file = path + '.psu'
     out_file = path + '.out'
     psu_file = os.path.abspath(psu_file)
+    py_file = os.path.abspath(py_file)
 
     with open(psu_file, 'a+') as f:
         f.write(jsdata)
@@ -81,7 +82,7 @@ def postmethod():
    
     
 
-    '''
+    
     for i in range(0,100):
         while True:
             try:
@@ -91,7 +92,7 @@ def postmethod():
                 continue
             break
 
-    '''
+    
     '''
     command = 'python ' + py_file + ' >> ' + out_file
     
@@ -130,7 +131,7 @@ def postmethod():
     return json.dumps(data)
     
     '''
-    data['python'] = command
-    data['output'] = "Test1"
+    data['python'] = py_file
+    data['output'] = python_code
     return json.dumps(data)
     
