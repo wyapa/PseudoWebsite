@@ -80,25 +80,33 @@ def postmethod():
     prog = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
    
     
-    
-    
-    prog.wait()
-    
 
-
-
+    
+    for i in range(0,100):
+        while True:
+            try:
+                with open(py_file, 'r') as file:
+                    python_code = file.read()
+            except Exception:
+                continue
+            break
     '''
-    with open(py_file, 'r') as file:
-        python_code = file.read()
-    
-    
     command = 'python ' + py_file + ' >> ' + out_file
     
     prog = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-    prog.wait()
-    with open(out_file, 'r') as file:
-        output = file.read()
     
+    
+
+
+     for i in range(0,100):
+        while True:
+            try:
+                with open(out_file, 'r') as file:
+                    output = file.read()
+    
+            except Exception:
+                continue
+            break
 
     data = {}
     
