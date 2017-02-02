@@ -72,8 +72,9 @@ def postmethod():
     
     
     command = 'python pseudo.py ' + psu_file
-    os.system(command)
     '''
+    os.system(command)
+    
     pseudo.main(command)
     '''
     '''
