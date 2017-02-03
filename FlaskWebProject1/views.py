@@ -127,8 +127,3 @@ def postmethod():
     data['output'] = output
     return json.dumps(data)
     
-    '''
-    data['python'] = py_file
-    data['output'] = python_code
-    return json.dumps(data)
-    '''
